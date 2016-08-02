@@ -48,7 +48,7 @@ void NVIC_Conf()   //tim中断，组1优先级0副优先级1
 	NVIC_InitTypeDef NVIC_InitStructure;
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
-	
+		
 	NVIC_InitStructure.NVIC_IRQChannel=DMA1_Channel1_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority=1;
