@@ -56,3 +56,26 @@ void NVIC_Conf()   //tim中断，组1优先级0副优先级1
 	NVIC_Init(&NVIC_InitStructure);
 
 }
+
+void DMA_Conf()
+{
+	DMA_InitTypeDef DMA_InitStructure;
+	
+	DMA_DeInit(DMA1_Channel1);
+	DMA_InitStructure.DMA_PeripheralBaseAddr=ADC1_DR_Address;
+	DMA_InitStructure.DMA_MemoryBaseAddr=(uint32_t)ADCVal;
+	DMA_InitStructure.DMA_DIR=DMA_DIR_PeripheralSRC;
+	DMA_InitStructure.DMA_BufferSize=2048;
+	DMA_InitStructure.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_MemoryInc=DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_PeripheralDataSize=DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStructure.DMA_MemoryDataSize=DMA_MemoryDataSize_HalfWord;
+	DMA_InitStructure.DMA_Mode=DMA_Mode_Circular;
+	DMA_InitStructure.DMA_Priority=DMA_Priority_High;
+	DMA_InitStructure.DMA_M2M=DMA_M2M_Disable;
+	DMA_Init(DMA1_Channel1,&DMA_InitStructure);
+	DMA_ClearFlag(DMA1_FLAG_TC1);
+	DMA_ClearITPendingBit(DMA1_IT_TC1);
+	DMA_ITConfig(DMA1_Channel1,DMA_IT_TC,ENABLE);
+	DMA_Cmd(DMA1_Channel1,ENABLE);
+}
