@@ -30,3 +30,15 @@ void GPIO_Conf()//GPIO:调试时根据需要开关io防止ad口悬空
 	*/
 	
 }
+
+void TIM3_Conf()//定时器配置，1s中断2048次
+{
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+
+	TIM_TimeBaseStructure.TIM_Period=35155;//36m/2048=17578.125 72m/2048=35156.25
+	TIM_TimeBaseStructure.TIM_Prescaler=0; 
+	TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+	TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseStructure);
+	TIM_SelectOutputTrigger(TIM3,TIM_TRGOSource_Update);
+}
