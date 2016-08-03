@@ -2,6 +2,17 @@
 
 __IO uint16_t ADCVal[2048];//adc数据储存
 
+
+void adc_init(void)//开机调用它初始化adc相关外设
+{
+	
+	GPIO_Conf();
+	TIM3_Conf();
+	DMA_Conf();
+	NVIC_Conf();
+	ADC1_Conf();
+}
+
 void adc_start(u8 mode) //mode ：PZT压电 MIC麦克
 {
 	switch(mode)
