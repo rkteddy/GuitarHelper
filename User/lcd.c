@@ -32,3 +32,50 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 		LCD_Writ_Bus(((V2 >> 2) & 0x0f)+((V1 << 4)& 0xf0),((V2 << 6)& 0xc0) + (V3 & 0x3f)); 	  // rgb 666 转 288	
 }	   
 
+
+void LCD_ShowChar(uint x,uint y,const char *f,const char *b,char ch)
+{       
+		unsigned char temp , Bytes;
+		unsigned char pos,t;
+		unsigned int  CHAR_W,CHAR_H;
+
+		 
+		// CHAR_W = 8;         // 8*16
+		// CHAR_H = 16;
+
+		CHAR_W = 16;         // 16*24
+		CHAR_H = 24;
+		LCD_CS(0);    // 片选打开
+		if(x>(LCD_SIZE_X-CHAR_W)||y>(LCD_SIZE_Y-CHAR_H))
+				return;
+		 
+		Address_set(x, y, x+CHAR_W-1, y+CHAR_H-1);
+		ch = ch-32;    // 按照ASCII编码顺序的到相应字母的编码
+		Bytes = (CHAR_W*CHAR_H)/8;
+		for(pos=0;pos<Bytes;pos++)    // CHAR_H 	(CHAR_W*CHAR_H)/8
+		{
+				//temp= Font8x16[ch][pos];
+				//temp= Font16x24[ch][pos];
+				temp= Font16x24[ch][pos];
+				for(t=0;t<8;t++) //CHAR_W
+				{                 
+						if(temp&0x80)
+								LCD_Write_COLOR(*f,*(f+1),*(f+2));
+						else
+								LCD_Write_COLOR(*b,*(b+1),*(b+2));
+						temp<<=1; 
+				}
+		 }
+		 LCD_CS(1);//关闭片选
+}  
+
+void LCD_ShowString(uint x,uint y,const char *f,const char *b,char *p)
+{         
+		while(*p!='\0')
+		{       
+				LCD_ShowChar(x,y,f,b,*p);
+				// x+=8;
+				x+=16;
+				p++;
+		} 
+}
