@@ -33,6 +33,23 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 }	   
 
 
+void Address_set(uint x1,uint y1,uint x2,uint y2)
+{  
+		LCD_Write_COM(0x00,0x02);LCD_Write_DATA(x1,x1>>8);    // 开始X
+		LCD_Write_COM(0x00,0x03);LCD_Write_DATA(x1>>8,x1);
+
+		LCD_Write_COM(0x00,0x06);LCD_Write_DATA(y1,y1>>8);    // 开始Y
+		LCD_Write_COM(0x00,0x07);LCD_Write_DATA(y1>>8,y1);
+
+		LCD_Write_COM(0x00,0x04);LCD_Write_DATA(x2,x2>>8);    // 结束X
+		LCD_Write_COM(0x00,0x05);LCD_Write_DATA(x2>>8,x2);
+
+		LCD_Write_COM(0x00,0x08);LCD_Write_DATA(y2,y2>>8);    // 结束Y
+		LCD_Write_COM(0x00,0x09);LCD_Write_DATA(y2>>8,y2);
+
+		LCD_Write_COM(0x00,0x22);							 
+}
+
 void LCD_ShowChar(uint x,uint y,const char *f,const char *b,char ch)
 {       
 		unsigned char temp , Bytes;
