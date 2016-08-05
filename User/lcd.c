@@ -33,6 +33,37 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 }	   
 
 
+void Drawsingle(uint x1,uint y1,uint x,uint y,uint m,const char *f,const char *b,const unsigned char*p)    // 指定区域作画,单色
+{   int n;
+	  char k=0;
+	  char i;
+	unsigned char j;
+	  LCD_CS(0);
+	   Address_set(x1,y1,x1+x-1,y1+y-1) ;    // 设置地址范围
+			 for (n=0;n<m;n++)	   
+	     {	
+				  j=*p;
+				for(k=0;k<8;k++) 
+				{
+					
+					i=j&0x80;    // 取出字节最高位
+					j=j<<1;
+					i=i>>7;
+				if(i)
+           {
+					 LCD_Write_COLOR(*f,*(f+1),*(f+2));
+					 }
+			  else
+			     { 
+				     
+				     LCD_Write_COLOR(*b,*(b+1),*(b+2));
+					 } 
+				 }    
+		    p++;     // 数组指针自加
+	     }
+    LCD_CS(1);		
+}
+
 void Address_set(uint x1,uint y1,uint x2,uint y2)
 {  
 		LCD_Write_COM(0x00,0x02);LCD_Write_DATA(x1,x1>>8);    // 开始X
