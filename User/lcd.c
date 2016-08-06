@@ -33,6 +33,37 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 }	   
 
 
+void Draw(uint x1,uint y1,uint x,uint y,uint m,const unsigned char*p)    // 指定区域作彩色图
+{   
+		int n;
+		unsigned char k=0;    // 横坐标计数变量
+	  int l=0;    // 纵坐标计数变量
+		char i=1;    // 是否需要重新写地址
+	  LCD_CS(0);
+		for (n=0;n<m/3;n++)	   
+	  {	
+				if (*p==0x3f&&*(p+1)==0x00&&*(p+2)==0x3f){i=1;}    // 紫色则跳过
+			  else
+			  { 
+						if(i)
+						{	 
+								Address_set(x1+k,y1+l,x1+x-1,y1+l);
+								i=0;
+						} 
+				    LCD_Write_COLOR(*p,*(p+1),*(p+2));
+				} 
+				p=p+3;
+				k++;    // 横坐标增加
+				if(k==x)
+				{
+					 i=1;
+					 k=0;
+					 l++; 
+				}    // x个像素后，k重新归零		 
+	  }
+    LCD_CS(1);		
+}
+
 void Drawsingle(uint x1,uint y1,uint x,uint y,uint m,const char *f,const char *b,const unsigned char*p)    // 指定区域作画,单色
 {   int n;
 	  char k=0;
