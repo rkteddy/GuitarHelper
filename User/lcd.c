@@ -67,7 +67,7 @@ void LCD_Init(void)
 		LCD_Write_DATA(0x00,0xF9); 
 		delayms(10);
 		
-    LCD_Write_COM(0x00,0x1B);  
+		LCD_Write_COM(0x00,0x1B);  
 		LCD_Write_DATA(0x00,0x14); 
 		
 		LCD_Write_COM(0x00,0x1A);  
@@ -192,7 +192,7 @@ void Piant(const char *c)
 		int i,j;
 		LCD_CS(0);    // 打开片选使能
 		Address_set(0,0,239,319);
-		for(i=0;i<320;i++)
+		for (i=0;i<320;i++)
 		{
 				for (j=0;j<240;j++)
 				{
