@@ -2,6 +2,161 @@
 #include"LCD_driver.h"
 #include"char.h"
 
+void LCD_Init(void)
+{
+    LCD_RST(1);
+	  delayms(5);	
+		LCD_RST(0);
+		delayms(5);
+		LCD_RST(1);
+		delayms(5);
+	
+		LCD_CS(0);    // 打开片选使能
+		                                                                                                                                                                                                                                                       
+    delayms(10);
+	
+    LCD_Write_COM(0x00,0x83);           
+		LCD_Write_DATA(0x00,0x02);    // TESTM=1 
+				 
+		LCD_Write_COM(0x00,0x85);  
+		LCD_Write_DATA(0x00,0x03);    // VDC_SEL=011
+		LCD_Write_COM(0x00,0x8B);  
+		LCD_Write_DATA(0x00,0x01); 
+		LCD_Write_COM(0x00,0x8C);  
+		LCD_Write_DATA(0x00,0x93);    // STBA[7]=1, STBA[5:4]=01, STBA[1:0]=11
+		
+		LCD_Write_COM(0x00,0x91);  
+		LCD_Write_DATA(0x00,0x01);    // DCDC_SYNC=1
+		
+		LCD_Write_COM(0x00,0x83);  
+		LCD_Write_DATA(0x00,0x00);    // TESTM=0
+		
+		// Gamma Setting
+
+		LCD_Write_COM(0x00,0x3E);  
+		LCD_Write_DATA(0x00,0xB0);
+		LCD_Write_COM(0x00,0x3F);  
+		LCD_Write_DATA(0x00,0x03); 
+		LCD_Write_COM(0x00,0x40);  
+		LCD_Write_DATA(0x00,0x10); 
+		LCD_Write_COM(0x00,0x41);  
+		LCD_Write_DATA(0x00,0x56); 
+		LCD_Write_COM(0x00,0x42);  
+		LCD_Write_DATA(0x00,0x13); 
+		LCD_Write_COM(0x00,0x43);  
+		LCD_Write_DATA(0x00,0x46); 
+		LCD_Write_COM(0x00,0x44);  
+		LCD_Write_DATA(0x00,0x23);
+		LCD_Write_COM(0x00,0x45);  
+		LCD_Write_DATA(0x00,0x76); 
+		LCD_Write_COM(0x00,0x46);  
+		LCD_Write_DATA(0x00,0x00); 
+		LCD_Write_COM(0x00,0x47);  
+		LCD_Write_DATA(0x00,0x5E); 
+		LCD_Write_COM(0x00,0x48);  
+		LCD_Write_DATA(0x00,0x4F);
+		LCD_Write_COM(0x00,0x49);  
+		LCD_Write_DATA(0x00,0x40);	
+		
+//**********Power On sequence************
+		
+		LCD_Write_COM(0x00,0x17);  
+		LCD_Write_DATA(0x00,0x91); 
+	 
+		LCD_Write_COM(0x00,0x2B);  
+		LCD_Write_DATA(0x00,0xF9); 
+		delayms(10);
+		
+    LCD_Write_COM(0x00,0x1B);  
+		LCD_Write_DATA(0x00,0x14); 
+		
+		LCD_Write_COM(0x00,0x1A);  
+		LCD_Write_DATA(0x00,0x11); 
+					
+		LCD_Write_COM(0x00,0x1C);  
+		LCD_Write_DATA(0x00,0x06);  // 0d
+		
+		LCD_Write_COM(0x00,0x1F);  
+		LCD_Write_DATA(0x00,0x42);
+		delayms(20);
+		
+		LCD_Write_COM(0x00,0x19);  
+		LCD_Write_DATA(0x00,0x0A); 
+ 
+		LCD_Write_COM(0x00,0x19);  
+		LCD_Write_DATA(0x00,0x1A); 
+		delayms(40);
+		
+		
+		LCD_Write_COM(0x00,0x19);  
+		LCD_Write_DATA(0x00,0x12); 
+		delayms(40);
+		
+		LCD_Write_COM(0x00,0x1E);  
+		LCD_Write_DATA(0x00,0x27);
+		delayms(100);	   
+		
+//**********DISPLAY ON SETTING***********
+        
+		LCD_Write_COM(0x00,0x24);  
+		LCD_Write_DATA(0x00,0x60);	
+		
+		LCD_Write_COM(0x00,0x3D);  
+		LCD_Write_DATA(0x00,0x40); 
+		
+		LCD_Write_COM(0x00,0x34);  
+		LCD_Write_DATA(0x00,0x38);
+		
+		LCD_Write_COM(0x00,0x35);  
+		LCD_Write_DATA(0x00,0x38);
+		
+		LCD_Write_COM(0x00,0x24);  
+		LCD_Write_DATA(0x00,0x38);
+		delayms(40);
+		
+		LCD_Write_COM(0x00,0x24);  
+		LCD_Write_DATA(0x00,0x3C); 
+		
+		LCD_Write_COM(0x00,0x16);  
+		LCD_Write_DATA(0x00,0x1C); 
+		
+		LCD_Write_COM(0x00,0x01);  
+		LCD_Write_DATA(0x00,0x06);	
+		
+		LCD_Write_COM(0x00,0x55);  
+		LCD_Write_DATA(0x00,0x00);
+
+		LCD_Write_COM(0x00,0x02);           
+		LCD_Write_DATA(0x00,0x00);
+		LCD_Write_COM(0x00,0x03);           
+		LCD_Write_DATA(0x00,0x00);
+		LCD_Write_COM(0x00,0x04);           
+		LCD_Write_DATA(0x00,0x00);
+		LCD_Write_COM(0x00,0x05);           
+		LCD_Write_DATA(0x00,0xef); 
+		
+		LCD_Write_COM(0x00,0x06);           
+		LCD_Write_DATA(0x00,0x00);	
+		LCD_Write_COM(0x00,0x07);           
+		LCD_Write_DATA(0x00,0x00);	
+		LCD_Write_COM(0x00,0x08);           
+		LCD_Write_DATA(0x00,0x01);	
+		LCD_Write_COM(0x00,0x09);           
+		LCD_Write_DATA(0x00,0x8f); 
+
+		LCD_Write_COM(0x00,0x22);  
+
+
+		LCD_CS(1); 
+}  
+
+void delayms(int count)  // /* X1ms */
+{
+		int i,j;
+		for(i=0;i<count;i++)
+			for(j=0;j<5000;j++);
+}
+
 void LCD_Writ_Bus(char VH,char VL)    // 并行数据写入函数
 {
     GPIOA->BSRR = VH & 0x00ff;  	 // 高位P1口
