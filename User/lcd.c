@@ -33,6 +33,21 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 }	   
 
 
+void Rechangle(int x1,int y1,int x,int y,const char *c)    // 指定区域画矩形
+{
+		int i,j;
+		LCD_CS(0);    // 打开片选使能
+		Address_set(x1,y1,x1+x-1,y1+y-1);
+    for(i=0;i<y;i++)
+		{
+				for (j=0;j<x;j++)
+				{
+						LCD_Write_COLOR(*c,*(c+1),*(c+2));
+				}
+	  }
+    LCD_CS(1);    // 关闭片选使能
+}
+
 void Draw(uint x1,uint y1,uint x,uint y,uint m,const unsigned char*p)    // 指定区域作彩色图
 {   
 		int n;
