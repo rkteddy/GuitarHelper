@@ -32,6 +32,20 @@ void LCD_Write_DATA(char VH,char VL)  	// 发送数据
 		LCD_Writ_Bus(((V2 >> 2) & 0x0f)+((V1 << 4)& 0xf0),((V2 << 6)& 0xc0) + (V3 & 0x3f)); 	  // rgb 666 转 288	
 }	   
 
+void Piant(const char *c)
+{
+		int i,j;
+		LCD_CS(0);    // 打开片选使能
+		Address_set(0,0,239,319);
+		for(i=0;i<320;i++)
+		{
+				for (j=0;j<240;j++)
+				{
+						LCD_Write_COLOR(*c,*(c+1),*(c+2));
+				}
+		}
+		LCD_CS(1);    // 关闭片选使能
+}
 
 void Rechangle(int x1,int y1,int x,int y,const char *c)    // 指定区域画矩形
 {
