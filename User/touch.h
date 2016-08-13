@@ -1,8 +1,6 @@
 #define u16   unsigned int
 #define u8    unsigned char
 
-
-
 #define CS_PIN      GPIO_Pin_4 
 #define DIN_PIN     GPIO_Pin_5	
 #define DCLK_PIN    GPIO_Pin_6
@@ -14,7 +12,6 @@
 #define    DCLK(x)   x ? GPIO_SetBits(GPIOB, DCLK_PIN) :   GPIO_ResetBits(GPIOB, DCLK_PIN)
 #define    DOUT(x)   x ? GPIO_SetBits(GPIOB, DOUT_PIN) :   GPIO_ResetBits(GPIOB, DOUT_PIN)
 #define    IRQ(x)    x ? GPIO_SetBits(GPIOB,  IRQ_PIN) :   GPIO_ResetBits(GPIOB, IRQ_PIN)
-
 
 // A/D 通道选择命令字和工作寄存器
 #define	CMD_RDX 	0xD0
