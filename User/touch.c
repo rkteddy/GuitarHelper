@@ -137,3 +137,17 @@ unsigned char Read_ADS2(u16 *x,u16 *y)
 		}
 		else return 0;	  
 } 
+
+// 带滤波的坐标读取
+// 最小值不能少于100.
+
+unsigned char Read_ADS(u16 *x,u16 *y)
+{
+		u16  xtemp,ytemp;			 	 		  
+		xtemp=ADS_Read_XY(CMD_RDX);
+		ytemp=ADS_Read_XY(CMD_RDY);	  												   
+		if(xtemp<100||ytemp<100)return 0;    // 读数失败
+		*x=xtemp;
+		*y=ytemp;
+		return 1;    // 读数成功
+}
