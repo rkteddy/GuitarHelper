@@ -87,3 +87,32 @@ u16 AD7843(u8 CMD)    // 外部中断0 用来接受键盘发来的数据
 
 		return  AD_Data	;
 }
+
+unsigned int ADS_Read_XY(u8 xy)
+{
+		u16  i, j;
+		u16  buf[READ_TIMES];
+		u16 sum=0;
+		u16 temp;
+		for(i=0;i<READ_TIMES;i++)
+		{				 
+				buf[i]=AD7843(xy);	    
+		}				    
+		for(i=0;i<READ_TIMES-1; i++)    // 排序
+		{
+				for(j=i+1;j<READ_TIMES;j++)
+				{
+						if(buf[i]>buf[j])    // 升序排列
+						{
+								temp=buf[i];
+								buf[i]=buf[j];
+								buf[j]=temp;
+						}
+				}
+		}	  
+		sum=0;
+		for (i=LOST_VAL;i<READ_TIMES-LOST_VAL;i++)
+				sum+=buf[i];
+		temp=sum/(READ_TIMES-2*LOST_VAL);
+		return temp;   
+}
