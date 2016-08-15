@@ -56,7 +56,7 @@ unsigned int ReadFromCharFrom7843()             //SPI 读数据
 	return(Num);
 }
 
-/*void itostr(int dd, char *str)
+/*void inttostr(int dd,  char *str)
 {
 		str[0]=dd/10000+48;	    // 个位
 		str[1]=(dd/1000)-((dd/10000)*10)+48;   // 十位
@@ -65,3 +65,25 @@ unsigned int ReadFromCharFrom7843()             //SPI 读数据
 		str[4]=dd-((dd/10)*10)+48;    // 万位
 		str[5]=0;
 }*/
+
+u16 AD7843(u8 CMD)    // 外部中断0 用来接受键盘发来的数据
+{
+		u16 AD_Data;
+		//delayms(1);    // 中断后延时以消除抖动，使得采样数据更准确
+		SPI_Start();    // 启动SPI
+		//delayms(1);
+		WriteCharTo7843(CMD);    // 送控制字 10010000 即用差分方式读X坐标
+		//delayms(1);
+		DCLK(1); Delay(200);
+		DCLK(0); Delay(200);
+		AD_Data =ReadFromCharFrom7843();
+		//WriteCharTo7843(0xD0);    // 送控制字 11010000 即用差分方式读Y坐标
+		//DCLK=1; _nop_();_nop_();_nop_();_nop_();
+		//DCLK=0; _nop_();_nop_();_nop_();_nop_();
+		//TP_X=ReadFromCharFrom7843();
+		Delay(150); 
+		Delay(150); 
+		CS(1);
+
+		return  AD_Data	;
+}
