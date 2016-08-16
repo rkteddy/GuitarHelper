@@ -116,3 +116,24 @@ unsigned int ADS_Read_XY(u8 xy)
 		temp=sum/(READ_TIMES-2*LOST_VAL);
 		return temp;   
 }
+
+unsigned char Read_ADS2(u16 *x,u16 *y) 
+{
+    u16  x1,y1;
+    u16  x2,y2;
+    u8  flag;    
+    flag=Read_ADS(&x1,&y1);   
+    if (flag==0)
+				return(0);//如果读数失败
+		flag=Read_ADS(&x2,&y2);	   
+    if (flag==0)
+				return(0);//如果读数失败   
+		if (((x2<=x1&&x1<x2+ERR_RANGE)||(x1<=x2&&x2<x1+ERR_RANGE))//前后两次采样在+-50内
+				&&((y2<=y1&&y1<y2+ERR_RANGE)||(y1<=y2&&y2<y1+ERR_RANGE)))
+		{
+				*x=(x1+x2)/2;
+				*y=(y1+y2)/2;
+				return 1;
+		}
+		else return 0;	  
+} 
