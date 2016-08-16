@@ -5,7 +5,7 @@
 extern GPIO_InitTypeDef GPIO_InitStructure;
 
 //**********************************************************
-void SPI_Start()                                     //SPI开始
+void SPI_Start()    //SPI开始
 {
 		DCLK(0);
 		Delay(100);
@@ -19,7 +19,7 @@ void SPI_Start()                                     //SPI开始
 		Delay(150); 
 }
 //**********************************************************
-void WriteCharTo7843(unsigned char num)          //SPI写数据
+void WriteCharTo7843(unsigned char num)    //SPI写数据
 {
 		unsigned char count=0;
 		DCLK(0);
@@ -29,12 +29,14 @@ void WriteCharTo7843(unsigned char num)          //SPI写数据
 						DIN(1);   /*判断发送位*/
 				else
 						DIN(0);   
-				DCLK(0); Delay(150);                //上升沿有效
-				DCLK(1); Delay(150);
+				DCLK(0);
+				Delay(150);    //上升沿有效
+				DCLK(1);
+				Delay(150);
 		}
 }
 //**********************************************************
-unsigned int ReadFromCharFrom7843()             //SPI 读数据
+unsigned int ReadFromCharFrom7843()    //SPI 读数据
 {
 	unsigned char count=0;
 	unsigned int Num=0;
@@ -43,12 +45,12 @@ unsigned int ReadFromCharFrom7843()             //SPI 读数据
 	{
 			Num<<=1;
 			DCLK(1);
-			Delay(150);                //下降沿有效
+			Delay(150);    //下降沿有效
 			DCLK(0);
 			Delay(150);
-			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 ; // 选择所有脚
-			GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;	 //推挽输出
-			GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;	 //输出的最大频率为50HZ
+			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 ;    // 选择所有脚
+			GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  	 // 推挽输出
+			GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  	 // 输出的最大频率为50HZ
 			GPIO_Init(GPIOB, &GPIO_InitStructure); 
 			if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_7))
 					Num++;
@@ -94,15 +96,15 @@ unsigned int ADS_Read_XY(u8 xy)
 		u16  buf[READ_TIMES];
 		u16 sum=0;
 		u16 temp;
-		for(i=0;i<READ_TIMES;i++)
+		for (i=0;i<READ_TIMES;i++)
 		{				 
 				buf[i]=AD7843(xy);	    
 		}				    
-		for(i=0;i<READ_TIMES-1; i++)    // 排序
+		for (i=0;i<READ_TIMES-1; i++)    // 排序
 		{
-				for(j=i+1;j<READ_TIMES;j++)
+				for (j=i+1;j<READ_TIMES;j++)
 				{
-						if(buf[i]>buf[j])    // 升序排列
+						if (buf[i]>buf[j])    // 升序排列
 						{
 								temp=buf[i];
 								buf[i]=buf[j];
@@ -124,11 +126,11 @@ unsigned char Read_ADS2(u16 *x,u16 *y)
     u8  flag;    
     flag=Read_ADS(&x1,&y1);   
     if (flag==0)
-				return(0);//如果读数失败
+				return 0;    // 如果读数失败
 		flag=Read_ADS(&x2,&y2);	   
     if (flag==0)
-				return(0);//如果读数失败   
-		if (((x2<=x1&&x1<x2+ERR_RANGE)||(x1<=x2&&x2<x1+ERR_RANGE))//前后两次采样在+-50内
+				return 0;    // 如果读数失败   
+		if (((x2<=x1&&x1<x2+ERR_RANGE)||(x1<=x2&&x2<x1+ERR_RANGE))    // 前后两次采样在+-50内
 				&&((y2<=y1&&y1<y2+ERR_RANGE)||(y1<=y2&&y2<y1+ERR_RANGE)))
 		{
 				*x=(x1+x2)/2;
