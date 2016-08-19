@@ -15,9 +15,11 @@ int TchScr_Xmax=3880,TchScr_Xmin=10,
 
 void GUI()
 {
-		LCD_CS (0);  //打开片选使能
+	  //打开片选使能
+		LCD_CS (0);  
 		
-		if (!GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3))//触摸信号检测
+		//触摸信号检测
+		if (!GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_3))
 		{		
 				flag=Read_ADS2(&X_Addata,&Y_Addata);
 				j = X_Addata;
@@ -29,12 +31,15 @@ void GUI()
 				i = TchScr_Ymax-TchScr_Ymin;
 				ly=j/i;
 			
-				if (flag)//检测到处触摸
+			  //检测到处触摸
+				if (flag)
 				{
-						switch (page)//当前页面触摸检测，更改page值
+						// 当前页面触摸检测，更改page值
+						switch (page)
 						{	
 								case 0:
-										if (keycheck(lx,ly,4,4,232,154))//选择调音功能
+										// 选择调音功能
+										if (keycheck(lx,ly,4,4,232,154))
 										{
 												Rechangle(4,4,232,154,color[2]);
 												Drawsingle(60,4,120,120,1800,color[0],color[2],tune);
@@ -43,7 +48,8 @@ void GUI()
 												change=1;
 												break;
 										}
-										if (keycheck(lx,ly,4,162,232,154))//选择和弦分析功能
+										// 选择和弦分析功能
+										if (keycheck(lx,ly,4,162,232,154))
 										{
 												Rechangle(4,162,232,154,color[2]);
 												Drawsingle(60,162,120,120,1800,color[0],color[2],chord);
@@ -52,7 +58,8 @@ void GUI()
 										}
 										
 								case 1:
-										if (keycheck(lx,ly,4,2,232,83))//选吉他
+										// 选吉他
+										if (keycheck(lx,ly,4,2,232,83))
 										{
 												Rechangle(4,2,232,83,color[2]);
 												Drawsingle(30,2,120,80,1200,color[0],color[2],guitar);
@@ -61,7 +68,8 @@ void GUI()
 												change=1;
 												break;
 										}
-										if (keycheck(lx,ly,4,87,232,83))//选贝司
+										// 选贝司
+										if (keycheck(lx,ly,4,87,232,83))
 										{
 												Rechangle(4,87,232,83,color[2]);
 												Drawsingle(30,87,120,80,1200,color[0],color[2],bass);
@@ -70,7 +78,8 @@ void GUI()
 												change=1;
 												break;
 										}
-										if (keycheck(lx,ly,4,172,232,83))//选尤克里里
+										// 选尤克里里
+										if (keycheck(lx,ly,4,172,232,83))
 										{
 												Rechangle(4,172,232,83,color[2]);
 												Drawsingle(20,172,120,80,1200,color[0],color[2],ukulele);
@@ -79,7 +88,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,4,257,114,62))//返回
+										// 返回
+										if (keycheck(lx,ly,4,257,114,62))
 										{
 												Rechangle(4,257,114,62,color[2]);
 												Drawsingle(35,270,48,36,216,color[0],color[2],arrowleft);
@@ -89,7 +99,8 @@ void GUI()
 										}
 								
 								case 2:
-										if (keycheck(lx,ly,4,4,114,80))    // 一弦
+										// 一弦
+										if (keycheck(lx,ly,4,4,114,80))
 										{	 
 												Rechangle(4,4,114,80,color[2]);
 												LCD_ShowString(5,46,color[0],color[2],"String1");
@@ -97,7 +108,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,122,4,114,80))    // 二弦
+										// 二弦
+										if (keycheck(lx,ly,122,4,114,80))
 										{	 
 												Rechangle(122,4,114,80,color[2]);
 												LCD_ShowString(123,46,color[0],color[2],"String2");
@@ -105,7 +117,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,4,88,114,80))    // 三弦
+										// 三弦
+										if (keycheck(lx,ly,4,88,114,80))
 										{
 												Rechangle(4,88,114,80,color[2]);
 												LCD_ShowString(5,130,color[0],color[2],"String3");
@@ -113,7 +126,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,122,88,114,80))    // 四弦
+								    // 四弦
+										if (keycheck(lx,ly,122,88,114,80))
 										{	 
 												Rechangle(122,88,114,80,color[2]);
 												LCD_ShowString(123,130,color[0],color[2],"String4");
@@ -121,7 +135,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,4,172,114,80))    // 五弦
+										// 五弦
+										if (keycheck(lx,ly,4,172,114,80))
 										{	 
 												Rechangle(4,172,114,80,color[2]);
 												LCD_ShowString(5,214,color[0],color[2],"String5");
@@ -129,7 +144,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,122,172,114,80))    // 六弦
+										// 六弦
+										if (keycheck(lx,ly,122,172,114,80))
 										{
 												Rechangle(122,172,114,80,color[2]);
 												LCD_ShowString(123,214,color[0],color[2],"String6");
@@ -137,7 +153,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,4,257,114,62))    // 返回
+										// 返回
+										if (keycheck(lx,ly,4,257,114,62))
 										{
 											  Rechangle(4,257,114,62,color[2]);
 												Drawsingle(35,270,48,36,216,color[0],color[2],arrowleft);
@@ -147,7 +164,8 @@ void GUI()
 										}
 										
 								case 3:
-										if(keycheck(lx,ly,3,4,76,59))    // A
+										// A
+										if(keycheck(lx,ly,3,4,76,59))
 										{
 												Rechangle(3,4,76,59,color[2]);
 												LCD_ShowString(33,22,color[0],color[2],"A");
@@ -155,7 +173,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,82,4,76,59))    // #A
+										// #A
+										if (keycheck(lx,ly,82,4,76,59))
 										{
 												Rechangle(82,4,76,59,color[2]);
 												LCD_ShowString(104,22,color[0],color[2],"#A");
@@ -163,7 +182,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,161,4,76,59))    // B
+										// B
+										if (keycheck(lx,ly,161,4,76,59))
 										{	
 												Rechangle(161,4,76,59,color[2]);
 												LCD_ShowString(191,22,color[0],color[2],"B");
@@ -171,7 +191,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,3,67,76,59))    // C
+										// C
+										if (keycheck(lx,ly,3,67,76,59))
 										{	
 												Rechangle(3,67,76,59,color[2]);
 												LCD_ShowString(33,85,color[0],color[2],"C");
@@ -179,7 +200,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if(keycheck(lx,ly,82,67,76,59))    // #C
+										// #C
+										if(keycheck(lx,ly,82,67,76,59))
 										{
 												Rechangle(82,67,76,59,color[2]);
 												LCD_ShowString(104,85,color[0],color[2],"#C");
@@ -187,7 +209,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,161,67,76,59))    // D
+										// D
+										if (keycheck(lx,ly,161,67,76,59))
 										{
 												Rechangle(161,67,76,59,color[2]);
 												LCD_ShowString(191,85,color[0],color[2],"D");
@@ -195,7 +218,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,3,130,76,59))    // #D
+										// #D
+										if (keycheck(lx,ly,3,130,76,59))
 										{
 												Rechangle(3,130,76,59,color[2]);
 												LCD_ShowString(25,148,color[0],color[2],"#D");
@@ -203,7 +227,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,82,130,76,59))    // E
+										// E
+										if (keycheck(lx,ly,82,130,76,59))
 										{
 												Rechangle(82,130,76,59,color[2]);
 												LCD_ShowString(112,148,color[0],color[2],"E");
@@ -211,7 +236,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,161,130,76,59))    // F
+										// F
+										if (keycheck(lx,ly,161,130,76,59))
 										{
 												Rechangle(161,130,76,59,color[2]);
 												LCD_ShowString(191,148,color[0],color[2],"F");
@@ -219,7 +245,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,3,193,76,59))    // #F
+										// #F
+										if (keycheck(lx,ly,3,193,76,59))
 										{
 												Rechangle(3,193,76,59,color[2]);
 												LCD_ShowString(25,211,color[0],color[2],"#F");
@@ -227,7 +254,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,82,193,76,59))    // G
+										// G
+										if (keycheck(lx,ly,82,193,76,59))
 										{	
 												Rechangle(82,193,76,59,color[2]);
 												LCD_ShowString(112,211,color[0],color[2],"G");
@@ -235,7 +263,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,161,193,76,59))    // #G
+										// #G
+										if (keycheck(lx,ly,161,193,76,59))
 										{
 												Rechangle(161,193,76,59,color[2]);
 												LCD_ShowString(183,211,color[0],color[2],"#G");
@@ -243,7 +272,8 @@ void GUI()
 												change=1; 
 												break;
 										}
-										if (keycheck(lx,ly,4,257,114,62))    // 返回
+										// 返回
+										if (keycheck(lx,ly,4,257,114,62))
 										{
 												Rechangle(4,257,114,62,color[2]);
 												Drawsingle(35,270,48,36,216,color[0],color[2],arrowleft);
@@ -253,7 +283,8 @@ void GUI()
 										}
 										
 						case 4:
-								if(keycheck(lx,ly,4,257,114,62))    // 返回
+								// 返回
+								if(keycheck(lx,ly,4,257,114,62))
 								{
 										Rechangle(4,257,114,62,color[2]);
 										Drawsingle(35,270,48,36,216,color[0],color[2],arrowleft);
@@ -265,11 +296,14 @@ void GUI()
 						flag=0;	
 				}
 		}
-		if (change)    // 判断画面有没有发生改变	
-		switch (page)    // 根据page的变化更新页面显示内容
+		// 判断画面有没有发生改变
+		if (change)
+		// 根据page的变化更新页面显示内容
+		switch (page)
 		{
+			  // 涂黑page0 选模式
 				case 0:
-						Piant(color[1]);    // 涂黑page0 选模式
+						Piant(color[1]);
 						Rechangle(4,4,232,154,color[5]);
 						Rechangle(4,162,232,154,color[5]);
 						Drawsingle(60,4,120,120,1800,color[0],color[5],tune);
@@ -278,8 +312,9 @@ void GUI()
 						LCD_ShowString(8,280,color[0],color[5],"Chord Analysis");
 						change=0;
 						break;
+				// 涂黑page1 选乐器
 				case 1:
-						Piant(color[1]);    // 涂黑page1 选乐器
+						Piant(color[1]);
 					  Rechangle(4,2,232,83,color[5]);
 						Drawsingle(30,2,120,80,1200,color[0],color[5],guitar);
 						LCD_ShowString(120,52,color[0],color[5],"Guitar");
@@ -295,8 +330,10 @@ void GUI()
 						Drawsingle(162,280,32,16,64,color[0],color[5],battery);
 						change=0;
 						break;
+				
+				// 涂黑page2 选弦
 				case 2:
-						Piant(color[1]);    // 涂黑page2 选弦
+						Piant(color[1]);
 					  Rechangle(4,4,114,80,color[5]);
 					  LCD_ShowString(5,46,color[0],color[5],"String1");
 					  Rechangle(122,4,114,80,color[5]);
@@ -316,8 +353,10 @@ void GUI()
 					  Drawsingle(162,280,32,16,64,color[0],color[5],battery);
 					  change=0;
 					  break;
+						
+				// 涂黑page3 选音
         case 3:
-						Piant(color[1]);    // 涂黑page3 选音
+						Piant(color[1]);
 				    Rechangle(3,4,76,59,color[5]);
 						LCD_ShowString(33,22,color[0],color[5],"A");
 						Rechangle(82,4,76,59,color[5]);
@@ -352,8 +391,10 @@ void GUI()
 					  Drawsingle(162,280,32,16,64,color[0],color[5],battery);
 					  change=0;
 					  break;
+						
+				// 涂黑		
 				case 4:
-						Piant(color[1]);    // 涂黑
+						Piant(color[1]);
 					  Rechangle(4,4,232,248,color[5]);
 					  Drawsingle(60,45,120,120,1800,color[0],color[5],tuning);
 					  LCD_ShowString(48,180,color[0],color[5],"Tuning...");
@@ -364,12 +405,15 @@ void GUI()
 					  change=0;
 					  break;	
 				}
-		 
-		LCD_CS (1);    // 关闭片选使能	
+    // 关闭片选使能
+		LCD_CS (1);	
    }
- }
- 
-unsigned char keycheck(uint lx,uint ly,uint x1,uint y1,uint x,uint y)    // 检测触摸位置是否在某区域中
+}
+
+/*
+ 检测触摸位置是否在某区域中
+*/
+unsigned char keycheck(uint lx,uint ly,uint x1,uint y1,uint x,uint y)
 {  
 		if((lx<x1+x-1)&&(ly<y1+y-1)&&(lx>x1)&&(ly>y1))
 		{ 
