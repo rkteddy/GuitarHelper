@@ -57,20 +57,20 @@ void GPIO_Conf()
 {
 		GPIO_InitTypeDef GPIO_InitStructure;
 			
-		
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;      //Analog--PZT
+    //Analog--PZT
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 		GPIO_Init(GPIOA,&GPIO_InitStructure);
-	/*
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;     //Analog--MIC
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-		GPIO_Init(GPIOA,&GPIO_InitStructure);
-		
 
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;      //Analog--BAT
+     //Analog--MIC
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 		GPIO_Init(GPIOA,&GPIO_InitStructure);
-		*/	
+		
+    //Analog--BAT
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+		GPIO_Init(GPIOA,&GPIO_InitStructure);
 }
 
 /*
@@ -80,7 +80,7 @@ void TIM3_Conf()
 {
 		TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 
-		TIM_TimeBaseStructure.TIM_Period=35155;//36m/2048=17578.125 72m/2048=35156.25
+		TIM_TimeBaseStructure.TIM_Period=35155;
 		TIM_TimeBaseStructure.TIM_Prescaler=0; 
 		TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1;
 		TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up;
