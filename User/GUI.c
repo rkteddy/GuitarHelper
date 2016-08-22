@@ -1,5 +1,6 @@
-#include <picture.h>
-#include <LCD_driver.h>
+#include "picture.h"
+#include "LCD_driver.h"
+
 unsigned char keycheck(uint lx,uint ly,uint x1,uint y1,uint x,uint y);
 unsigned int TP_X,TP_Y;
 unsigned int lx,ly;
@@ -10,8 +11,6 @@ unsigned long i,j;
 unsigned int  X_Addata,Y_Addata;
 int TchScr_Xmax=3880,TchScr_Xmin=10,
    TchScr_Ymax=3880,TchScr_Ymin=10;
-
-
 
 void GUI()
 {
