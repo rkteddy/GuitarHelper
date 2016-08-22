@@ -7,11 +7,11 @@
 #define DOUT_PIN    GPIO_Pin_7
 #define IRQ_PIN     GPIO_Pin_3
 
-#define    CS(x)     x ? GPIO_SetBits(GPIOB,   CS_PIN) :   GPIO_ResetBits(GPIOB, CS_PIN)
-#define    DIN(x)    x ? GPIO_SetBits(GPIOB,  DIN_PIN) :   GPIO_ResetBits(GPIOB, DIN_PIN)
-#define    DCLK(x)   x ? GPIO_SetBits(GPIOB, DCLK_PIN) :   GPIO_ResetBits(GPIOB, DCLK_PIN)
-#define    DOUT(x)   x ? GPIO_SetBits(GPIOB, DOUT_PIN) :   GPIO_ResetBits(GPIOB, DOUT_PIN)
-#define    IRQ(x)    x ? GPIO_SetBits(GPIOB,  IRQ_PIN) :   GPIO_ResetBits(GPIOB, IRQ_PIN)
+#define CS(x)     x ? GPIO_SetBits(GPIOB,   CS_PIN) :   GPIO_ResetBits(GPIOB, CS_PIN)
+#define DIN(x)    x ? GPIO_SetBits(GPIOB,  DIN_PIN) :   GPIO_ResetBits(GPIOB, DIN_PIN)
+#define DCLK(x)   x ? GPIO_SetBits(GPIOB, DCLK_PIN) :   GPIO_ResetBits(GPIOB, DCLK_PIN)
+#define DOUT(x)   x ? GPIO_SetBits(GPIOB, DOUT_PIN) :   GPIO_ResetBits(GPIOB, DOUT_PIN)
+#define IRQ(x)    x ? GPIO_SetBits(GPIOB,  IRQ_PIN) :   GPIO_ResetBits(GPIOB, IRQ_PIN)
 
 // A/D 通道选择命令字和工作寄存器
 #define	CMD_RDX 	0xD0
