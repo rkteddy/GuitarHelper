@@ -253,3 +253,10 @@ void USART_Conf()
 		USART_ClearFlag(USART1,USART_FLAG_TC);
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
 }
+
+int fputc(int ch,FILE *f)
+{
+		USART_SendData(USART1,(uint8_t) ch);
+		while((USART_GetFlagStatus(USART1,USART_FLAG_TC)) == RESET) ;
+		return (ch);
+}
