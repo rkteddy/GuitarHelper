@@ -209,3 +209,19 @@ void NVIC_Configuration(void)
 			NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);   
 		#endif
 }
+
+void DMA1_Channel1_IRQHandler()   // DMAÖÐ¶Ï
+{
+		u16 i;
+		if(DMA_GetITStatus(DMA1_IT_TC1))
+		{
+				//TIM_Cmd(TIM3,DISABLE);  
+				DMA_ClearITPendingBit(DMA1_IT_GL1);
+				for (i=0;i<2048;i++)
+				{
+						s[i].real=(float)ADCVal[i];
+						s[i].imag=0;
+				}
+				FFT(s);		
+		}
+}		
